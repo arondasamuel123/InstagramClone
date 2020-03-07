@@ -15,6 +15,12 @@ class Image(models.Model):
 class Comment(models.Model):
     comment = models.CharField(max_length=30)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    image_id = models.ForeignKey(Image, on_delete=models.CASCADE)   
+    image_id = models.ForeignKey(Image, on_delete=models.CASCADE)
+    
+class Like(models.Model):
+    likes = models.IntegerField()
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    image_id = models.ForeignKey(Image, on_delete=models.CASCADE)
+      
     
     
