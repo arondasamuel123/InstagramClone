@@ -16,3 +16,13 @@ class ImageModelTestClass(TestCase):
         self.image_one.save_image()
         images = Image.objects.all()
         self.assertTrue(len(images)> 0)
+        
+    def test_delete_image(self):
+        self.user_sam.save()
+        self.profile_one.save()
+        self.image_one.save_image()
+        self.image_one.delete_image()
+        images = Image.objects.all()
+        self.assertTrue(len(images)==0)
+        
+        
