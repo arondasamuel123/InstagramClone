@@ -57,6 +57,24 @@ class ProfileModelTestClass(TestCase):
         self.profile_two.get_prof_id(self.profile_two.id)
         self.profile_two.update_profile('This is the third bio')
         self.assertTrue(self.profile_two.bio=='This is the third bio')
+
+class CommentTestClass(TestCase):
+    def setUp(self):
+        self.user_jack = User(username='jack', email='jackdoe@gmail.com', password='abcdef')
+        self.profile = Profile(profile_photo='/path/imgthree.png', bio='I am Jack', user=self.user_jack)
+        self.image_three = Image(image_name='Food', image_caption='Juicy steak',image_location='/path/imgfour.png', profile=self.profile)
+        self.comment_one = Comment(comment='This food looks delicious', user_id=self.user_jack, image_id=self.image_three)
+        
+        
+    
+    def test_save_comments(self):
+        self.user_jack.save()
+        self.profile.save_profile()
+        self.image_three.save_image()
+        self.comment_one.save_comment()
+        comments = Comment.objects.all()
+        
+        self.assertTrue(len(comments)> 0)
         
         
         
