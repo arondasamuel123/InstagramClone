@@ -1,6 +1,6 @@
 # Django Photo Gallery
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
+[![codebeat badge](https://codebeat.co/badges/0da823e2-d35a-479f-bb6d-3e79e006112f)](https://codebeat.co/projects/github-com-arondasamuel123-instagramclone-master)
 
 ## Description
 This a web application built using Python, Django and Postgresql.The app is basically a clone of the instagram app, you can post photos under your account and view them on your profile page. As a user you follow other users and other users can follow you. As a user you can like pictures and leave a comment on them, as well as interacting with django's authentication system, as well as uploading images, building a profile page in django
@@ -25,7 +25,7 @@ Samuel Aronda
 ```
 ##  Create virtual environment
 ```bash
-    python3.6 -m venv --without-pip
+    python3.6 -m venv --without-pip virtual
     
 ```
 ## Activate virtual and install requirements.txt
