@@ -12,7 +12,7 @@ Samuel Aronda
 
 
 ## DB diagram
-![instagram(1) ](images/docs/instagram(1).png)
+![Instagram (1)](https://user-images.githubusercontent.com/31355212/76138054-d5e07d80-6054-11ea-8f21-dcb94aba8047.png)
 
 
 # Installation
