@@ -51,5 +51,13 @@ class ProfileModelTestClass(TestCase):
         profiles = Profile.objects.all()
         self.assertTrue(len(profiles)== 0)
         
+    def test_update_bio(self):
+        self.user_john.save()
+        self.profile_two.save_profile()
+        self.profile_two.get_prof_id(self.profile_two.id)
+        self.profile_two.update_profile('This is the third bio')
+        self.assertTrue(self.profile_two.bio=='This is the third bio')
+        
+        
         
         

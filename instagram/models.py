@@ -12,7 +12,15 @@ class Profile(models.Model):
         self.save()
     def delete_profile(self):
         self.delete()
-    
+    @classmethod
+    def get_prof_id(cls, id):
+        profile = cls.objects.filter(id=id).all()
+        return profile
+    def update_profile(self, bio):
+        self.bio = bio
+        self.save()
+        
+        
     
 class Image(models.Model):
     image_name = models.CharField(max_length=30)
