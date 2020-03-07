@@ -8,6 +8,8 @@ class Profile(models.Model):
     follower_user = models.IntegerField(blank=True , null=True)
     following_user = models.IntegerField(blank=True, null=True)
     
+    def save_profile(self):
+        self.save()
     
 class Image(models.Model):
     image_name = models.CharField(max_length=30)

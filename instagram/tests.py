@@ -33,3 +33,17 @@ class ImageModelTestClass(TestCase):
         self.image_one.update_cap('This is not Football')
         self.assertTrue(self.image_one.image_caption=='This is not Football')
         
+class ProfileModelTestClass(TestCase):
+    def setUp(self):
+        self.user_john = User(username='johndoe', email='johndoe@gmail.com', password='abcdef')
+        self.profile_two = Profile(profile_photo='/path/imgtwo.png', bio='This is the second bio', user=self.user_john)
+        
+        
+    def test_save_profile(self):
+        self.user_john.save()
+        self.profile_two.save_profile()
+        profiles = Profile.objects.all()
+        self.assertTrue(len(profiles) > 0)
+        
+        
+        
