@@ -25,4 +25,11 @@ class ImageModelTestClass(TestCase):
         images = Image.objects.all()
         self.assertTrue(len(images)==0)
         
+    def test_update_caption(self):
+        self.user_sam.save()
+        self.profile_one.save()
+        self.image_one.save_image()
+        self.image_one.get_img_id(self.image_one.id)
+        self.image_one.update_cap('This is not Football')
+        self.assertTrue(self.image_one.image_caption=='This is not Football')
         

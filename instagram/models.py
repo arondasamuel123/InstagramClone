@@ -19,7 +19,14 @@ class Image(models.Model):
         self.save()
     def delete_image(self):
         self.delete()
-        
+    @classmethod
+    def get_img_id(cls, id):
+        image = cls.objects.filter(id=id).all()
+        return image
+    
+    def update_cap(self, image_caption):
+        self.image_caption = image_caption
+        self.save()
     
 class Comment(models.Model):
     comment = models.CharField(max_length=30)
