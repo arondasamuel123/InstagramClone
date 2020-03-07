@@ -1,10 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Profile(models.Model):
+class Profile(User):
     profile_photo = models.ImageField(upload_to='insta/', blanl=True)
     bio = models.TextField(max_length=30)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.OneToOneField(User, on_delete=models.CASCADE)
+    follower_user = models.IntegerField()
+    following_user = models.IntegerField()
+    
     
 class Image(models.Model):
     image_name = models.CharField(max_length=30)
@@ -21,6 +24,11 @@ class Like(models.Model):
     likes = models.IntegerField()
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     image_id = models.ForeignKey(Image, on_delete=models.CASCADE)
-      
+
+class Followers(models.Model):
+    follower_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    following_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+        
     
     
