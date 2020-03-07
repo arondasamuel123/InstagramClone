@@ -53,6 +53,9 @@ class Like(models.Model):
     likes = models.IntegerField()
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     image_id = models.ForeignKey(Image, on_delete=models.CASCADE)
+    
+    def save_like(self):
+        self.save()
 
 class Followers(models.Model):
     f_user = models.ForeignKey(Profile, related_name='%(class)s_follower_user',on_delete=models.CASCADE)

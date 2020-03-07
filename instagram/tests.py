@@ -76,6 +76,26 @@ class CommentTestClass(TestCase):
         
         self.assertTrue(len(comments)> 0)
         
+class LikeModelTestClass(TestCase):
+    def setUp(self):
+         self.user_jane = User(username='jane', email='janedoe@gmail.com', password='abcdef12')
+         self.profile = Profile(profile_photo='/path/imgfour.png', bio='I am Jack', user=self.user_jane)
+         self.image_four = Image(image_name='Food', image_caption='Juicy steak',image_location='/path/imgfive.png', profile=self.profile)
+         self.like_photo = Like(likes=20, user_id=self.user_jane, image_id=self.image_four)
+         
+         
+    def test_save_likes(self):
+        self.user_jane.save()
+        self.profile.save_profile()
+        self.image_four.save_image()
+        self.like_photo.save_like()
+        likes = Like.objects.all()
+        self.assertTrue(len(likes)> 0)
+        
+        
+
+        
+        
         
         
         
