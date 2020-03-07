@@ -12,6 +12,9 @@ class Image(models.Model):
     image_location = models.ImageField(upload_to='insta/', blank=True)
     profile_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
     
-    
+class Comment(models.Model):
+    comment = models.CharField(max_length=30)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    image_id = models.ForeignKey(Image, on_delete=models.CASCADE)   
     
     
