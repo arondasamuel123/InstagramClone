@@ -57,6 +57,13 @@ class ProfileModelTestClass(TestCase):
         self.profile_two.get_prof_id(self.profile_two.id)
         self.profile_two.update_profile('This is the third bio')
         self.assertTrue(self.profile_two.bio=='This is the third bio')
+    
+    def test_search_by_profile(self):
+        self.user_john.save()
+        self.profile_two.save_profile()
+        profiles = self.profile_two.search_by_profile('johndoe')
+        
+        self.assertTrue(len(profiles) > 0)
 
 class CommentTestClass(TestCase):
     def setUp(self):

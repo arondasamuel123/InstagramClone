@@ -19,6 +19,11 @@ class Profile(models.Model):
     def update_profile(self, bio):
         self.bio = bio
         self.save()
+    
+    @classmethod
+    def search_by_profile(cls,search_term):
+        profiles = cls.objects.filter(user__username__icontains=search_term)
+        return profiles
         
         
     
