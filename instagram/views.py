@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.models import User
-from .forms import SignUpForm,LoginForm,ProfileForm
+from .forms import SignUpForm,LoginForm,ProfileForm, ImageForm
 from .token import account_activation_token
 from django.contrib.sites.shortcuts import get_current_site
 from .models import Profile
@@ -75,6 +75,19 @@ def profile(request):
 def profile_user(request, id):
     profile = Profile.objects.filter(user_id=id).all()
     return render(request, 'display_profile.html', {"profile":profile})
+
+def post_image(request):
+    current_user = request.user
+    if request.method=='POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.profile = current_user.profile
+            image.save()
+            return redirect(home)
+    else:
+        form = ImageForm()
+    return render(request, 'post_image.html',{"form":form})
 
 def logout_view(request):
     logout(request)
