@@ -73,8 +73,10 @@ def profile(request):
         form = ProfileForm()
     return render(request, 'profile.html',{"form":form})
 def profile_user(request, id):
+    current_user = request.user
     profile = Profile.objects.filter(user_id=id).all()
-    return render(request, 'display_profile.html', {"profile":profile})
+    images = Image.objects.filter(profile_id=current_user.profile.id).all()
+    return render(request, 'display_profile.html', {"profile":profile, "images":images})
 
 def post_image(request):
     current_user = request.user
@@ -88,6 +90,8 @@ def post_image(request):
     else:
         form = ImageForm()
     return render(request, 'post_image.html',{"form":form})
+
+
 
 
 

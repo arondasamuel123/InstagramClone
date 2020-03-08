@@ -16,6 +16,24 @@
             </div>
           </div>
           {%endfor%}
+            
+          
+
+
+    </div>
+    <br>
+    <h2 align="center">YOUR IMAGES</h2>
+    <div class="row">
+        {%for image in images %}
+          <div class="card mt-4 mx-auto" style="width: 20rem; margin-right: auto;">
+            <img class="card-img-top" src="{{image.image_location.url}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{image.image_name}}</h5>
+              <p class="card-text">{{image.image_caption}}</p>
+            </div>
+          </div>
+
+          {%endfor%}
 
     </div>
 
