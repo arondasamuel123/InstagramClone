@@ -6,12 +6,12 @@ from django.contrib.auth.models import User
 from .forms import SignUpForm,LoginForm,ProfileForm, ImageForm
 from .token import account_activation_token
 from django.contrib.sites.shortcuts import get_current_site
-from .models import Profile
+from .models import Profile, Image
 from .email import activation_email
 from django.contrib.auth import login, authenticate, logout
 def home(request):
-    
-    return render(request,'home.html')
+    images = Image.objects.all()
+    return render(request,'home.html', {"images":images})
     
 def signup(request):
     if request.method=='POST':
@@ -88,6 +88,8 @@ def post_image(request):
     else:
         form = ImageForm()
     return render(request, 'post_image.html',{"form":form})
+
+
 
 def logout_view(request):
     logout(request)
