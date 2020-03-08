@@ -3,9 +3,10 @@ from django.http import HttpResponse
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.models import User
-from .forms import SignUpForm,LoginForm
+from .forms import SignUpForm,LoginForm,ProfileForm
 from .token import account_activation_token
 from django.contrib.sites.shortcuts import get_current_site
+from .models import Profile
 from .email import activation_email
 from django.contrib.auth import login, authenticate, logout
 def home(request):
@@ -22,7 +23,7 @@ def signup(request):
             current_site = get_current_site(request)
             to_email = form.cleaned_data.get('email')
             activation_email(user, current_site, to_email)
-            return HttpResponse('Check your email to verify your account')
+            return 'Check your email'
     else:
         form = SignUpForm()
     return render(request, 'django_registration/registration_form.html', {"form":form})
@@ -58,6 +59,22 @@ def login(request):
     else:
         form=LoginForm()
     return render(request, 'registration/login.html',{"form":form})
+
+def profile(request):
+    current_user = request.user
+    if request.method=="POST":
+        form = ProfileForm(request.POST,request.FILES)
+        if form.is_valid():
+            profile =form.save(commit=False)
+            profile.user = current_user
+            profile.save()
+            return redirect(home)
+    else:
+        form = ProfileForm()
+    return render(request, 'profile.html',{"form":form})
+def profile_user(request, id):
+    profile = Profile.objects.filter(user_id=id).all()
+    return render(request, 'display_profile.html', {"profile":profile})
 
 def logout_view(request):
     logout(request)

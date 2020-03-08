@@ -2,7 +2,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="/">INSTAGRAM</a>
   
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       {%if user.is_authenticated %}
@@ -15,11 +15,14 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="#">Profile</a>
+          <a class="nav-link" href="/profile/{{user.id}}">Profile</a>
         </li>
 
         <li class="nav-item">
           <a class="nav-link" href="/logout">Logout</a>
+        </li>
+        <li class="disabled">
+          <a class="nav-link">Welcome {{user.username}}</a>
         </li>
       </ul>
       {%else%}

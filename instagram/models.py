@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from cloudinary.models import CloudinaryField
 class Profile(models.Model):
-    profile_photo = models.ImageField(upload_to='insta/', blank=True)
+    profile_photo = CloudinaryField('profile_photo')
     bio = models.TextField(max_length=30)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     follower_user = models.IntegerField(blank=True , null=True)
@@ -30,7 +30,7 @@ class Profile(models.Model):
 class Image(models.Model):
     image_name = models.CharField(max_length=30)
     image_caption = models.CharField(max_length=30)
-    image_location = models.ImageField(upload_to='insta/', blank=True)
+    image_location = CloudinaryField('image_location')
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     
     def save_image(self):
