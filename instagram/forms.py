@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.models import User
-from .models import Profile,Image
+from .models import Profile,Image,Comment
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField()
@@ -27,5 +27,10 @@ class ImageForm(forms.ModelForm):
         model = Image
         exclude = ['profile']
         fields = ('image_name', 'image_caption','image_location')
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        exclude = ['image_id', 'user_id']
+        fields = ('comment',)
     
     

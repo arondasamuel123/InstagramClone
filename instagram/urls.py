@@ -8,7 +8,10 @@ urlpatterns = [
     path('profile/<int:id>', views.profile_user, name='dipslay-profile'),
     path('post/image/',views.post_image,name='post-image'),
     path('search/', views.search_user, name='search-user'),
+    path('comment/<int:id>', views.write_comment, name='write-comment'),
+    path('image/<int:img_id>', views.specific_image, name='single-image'),
     path('logout/', views.logout_view, name='logout')
+    
 
 ]
 

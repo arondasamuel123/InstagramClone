@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.models import User
-from .forms import SignUpForm,LoginForm,ProfileForm, ImageForm
+from .forms import SignUpForm,LoginForm,ProfileForm, ImageForm, CommentForm
 from .token import account_activation_token
 from django.contrib.sites.shortcuts import get_current_site
 from .models import Profile, Image
@@ -39,7 +39,7 @@ def activate(request,uidb64,token):
             user.is_active = True
             user.save()
             login(request,user)
-            return render(request, 'home.html')
+            return render(request, 'activation_email_body.html', {"uid":uid, "token":token})
         else:
             HttpResponse("Activation link is invalid")
 def login(request):
@@ -91,6 +91,11 @@ def post_image(request):
         form = ImageForm()
     return render(request, 'post_image.html',{"form":form})
 
+def specific_image(request, img_id):
+    image = Image.objects.get(pk=img_id)
+    
+    return render(request,'single_image.html',{"image":image})
+
 def search_user(request):
     if 'user' in request.GET and request.GET['user']:
         search_user = request.GET.get('user')
@@ -98,6 +103,21 @@ def search_user(request):
         message = f'{search_user}'
         return render(request, 'search_profile.html',{"users":searched_users, "message":message})
 
+def write_comment(request, id):
+    current_user = request.user
+    image = Image.objects.get(pk=id)
+    if request.method=='POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user_id = current_user
+            comment.image_id = image
+            comment.save_comment()
+            return redirect(home)
+    else:
+        form= CommentForm()
+    return render(request, 'write_comment.html', {"form":form, "image":image})
+    
 
 
 def logout_view(request):
