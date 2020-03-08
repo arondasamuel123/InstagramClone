@@ -91,7 +91,12 @@ def post_image(request):
         form = ImageForm()
     return render(request, 'post_image.html',{"form":form})
 
-
+def search_user(request):
+    if 'user' in request.GET and request.GET['user']:
+        search_user = request.GET.get('user')
+        searched_users = Profile.search_by_profile(search_user)
+        message = f'{search_user}'
+        return render(request, 'search_profile.html',{"users":searched_users, "message":message})
 
 
 
