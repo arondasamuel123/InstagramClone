@@ -16,12 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from instagram.views import activate
-# from django_registration.backends.one_step.views import RegistrationView
+from django_registration.backends.one_step.views import RegistrationView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('instagram.urls')),
-    # path('accounts/register/',RegistrationView.as_view(success_url='/'),name='django_registration_register'),
-    path('accounts/', include('django_registration.backends.activation.urls')),
+    path('accounts/register/',RegistrationView.as_view(success_url='/profile/'),name='django_registration_register'),
+    path('accounts/', include('django_registration.backends.one_step.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('activate/<uidb64>/<token>/',activate, name='activate')
+    #path('activate/<str:uidb64>/<str:token>/',activate, name='activate')
+    
 ]

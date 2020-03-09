@@ -9,6 +9,8 @@ from django.contrib.sites.shortcuts import get_current_site
 from .models import Profile, Image, Comment, Like
 from .email import activation_email
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
+@login_required(login_url='/accounts/login')
 def home(request):
     images = Image.objects.all()
     return render(request,'home.html', {"images":images})
@@ -39,7 +41,7 @@ def activate(request,uidb64,token):
             user.is_active = True
             user.save()
             login(request,user)
-            return render(request, 'activation_email_body.html', {"uid":uid, "token":token})
+            return redirect(profile)
         else:
             HttpResponse("Activation link is invalid")
 def login(request):
