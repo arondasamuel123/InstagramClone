@@ -1,4 +1,4 @@
-# Django Photo Gallery
+# Instagram Clone
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![codebeat badge](https://codebeat.co/badges/0da823e2-d35a-479f-bb6d-3e79e006112f)](https://codebeat.co/projects/github-com-arondasamuel123-instagramclone-master)
 
