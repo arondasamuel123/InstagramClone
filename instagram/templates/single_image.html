@@ -12,7 +12,23 @@
           </div>  
       </div>
     </div>
+    <br>
+    <br>
+    
+    <h2>COMMENTS</h2>
+    {%for comment in comments%}
+    <div class="row">
+        <div class="card mt-4" style="width: 20rem; margin-right: auto;">
+            <div class="card-body">
+              <h5 class="card-title">{{comment.image_id.image_name}}</h5>
+              <p class="card-text">{{comment.comment}}</p>
+              <p class="card-text">Posted by:{{comment.user_id.username}}</p>
+          </div>  
+      </div>
 
+    </div>
+    {%endfor%}
+</div>
 
 
 {%endblock%}

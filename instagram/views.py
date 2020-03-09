@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from .forms import SignUpForm,LoginForm,ProfileForm, ImageForm, CommentForm
 from .token import account_activation_token
 from django.contrib.sites.shortcuts import get_current_site
-from .models import Profile, Image
+from .models import Profile, Image, Comment
 from .email import activation_email
 from django.contrib.auth import login, authenticate, logout
 def home(request):
@@ -93,8 +93,8 @@ def post_image(request):
 
 def specific_image(request, img_id):
     image = Image.objects.get(pk=img_id)
-    
-    return render(request,'single_image.html',{"image":image})
+    comments = Comment.objects.filter(image_id=img_id).all()
+    return render(request,'single_image.html',{"image":image, "comments":comments})
 
 def search_user(request):
     if 'user' in request.GET and request.GET['user']:
