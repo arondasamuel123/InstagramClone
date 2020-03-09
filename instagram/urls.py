@@ -10,6 +10,7 @@ urlpatterns = [
     path('search/', views.search_user, name='search-user'),
     path('comment/<int:id>', views.write_comment, name='write-comment'),
     path('image/<int:img_id>', views.specific_image, name='single-image'),
+    path('likes/<int:img_id>', views.likes, name='likes'),
     path('logout/', views.logout_view, name='logout')
     
 

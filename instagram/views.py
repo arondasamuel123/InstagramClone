@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from .forms import SignUpForm,LoginForm,ProfileForm, ImageForm, CommentForm
 from .token import account_activation_token
 from django.contrib.sites.shortcuts import get_current_site
-from .models import Profile, Image, Comment
+from .models import Profile, Image, Comment, Like
 from .email import activation_email
 from django.contrib.auth import login, authenticate, logout
 def home(request):
@@ -93,8 +93,9 @@ def post_image(request):
 
 def specific_image(request, img_id):
     image = Image.objects.get(pk=img_id)
+    no_of_likes = image.like_set.all().count()
     comments = Comment.objects.filter(image_id=img_id).all()
-    return render(request,'single_image.html',{"image":image, "comments":comments})
+    return render(request,'single_image.html',{"image":image, "comments":comments, "no_of_likes":no_of_likes})
 
 def search_user(request):
     if 'user' in request.GET and request.GET['user']:
@@ -118,7 +119,12 @@ def write_comment(request, id):
         form= CommentForm()
     return render(request, 'write_comment.html', {"form":form, "image":image})
     
-
+def likes(request, img_id):
+    current_user = request.user
+    current_image = Image.objects.get(pk=img_id)
+    new_like= Like.objects.create(user=current_user, image=current_image)
+    
+    return redirect(home)
 
 def logout_view(request):
     logout(request)

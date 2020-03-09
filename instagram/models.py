@@ -55,9 +55,8 @@ class Comment(models.Model):
         self.save()
     
 class Like(models.Model):
-    likes = models.IntegerField()
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    image_id = models.ForeignKey(Image, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
     
     def save_like(self):
         self.save()
